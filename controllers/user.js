@@ -37,3 +37,20 @@ export const getUsers = async (req, res, next) => {
     next(err);
   }
 }
+export const userUpdate = async (req, res, next) => {
+  try {
+    const {id}= req.body;
+    const {user} = req.body
+    console.log(id);
+    console.log(req.body);
+    const updatedUser = await User.findByIdAndUpdate(id, {
+      $set: req.body.user
+    }
+    
+      
+    );
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    next(err);
+  }
+}
