@@ -45,7 +45,7 @@ export const update = async (req, res, next) => {
     const { id } = req.body;
     const { newUser } = req.body;
     console.log(id, newUser);
-    try {
+    try {   
        
         const updatedUser = await User.findByIdAndUpdate(
             id,
