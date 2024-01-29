@@ -27,7 +27,7 @@ export const login = async (req, res, next) => {
         if (!isPasswordCorrect)
             return next(createError(400, "Wrong Password or Username!"));
 
-        const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT);
+        const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT,{expiresIn:'1h'});
 
         const { password, isAdmin, ...otherDetails } = user._doc;
         res.cookie("access_token", token, {
@@ -38,5 +38,23 @@ export const login = async (req, res, next) => {
     } catch (err) {
         next(err)
     }
-  
+
+}
+
+export const update = async (req, res, next) => {
+    const { id } = req.body;
+    const { newUser } = req.body;
+    console.log(id, newUser);
+    try {
+       
+        const updatedUser = await User.findByIdAndUpdate(
+            id,
+            { $set: newUser },
+            { new: true }
+        );
+        res.status(200).json(updatedUser);
+
+    } catch (err) {
+        next(err);
+    }
 }
