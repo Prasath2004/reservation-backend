@@ -15,7 +15,10 @@ export const updateUser = async (req, res, next) => {
 }
 export const deleteUser = async (req, res, next) => {
   try {
-    await User.findByIdAndDelete(req.params.id);
+    const { id } = req.body;
+    console.log("dfsvs");
+    console.log(id);
+    await User.findByIdAndDelete(id);
     res.status(200).json("User has been deleted.");
   } catch (err) {
     next(err);
@@ -39,17 +42,29 @@ export const getUsers = async (req, res, next) => {
 }
 export const userUpdate = async (req, res, next) => {
   try {
-    const {id}= req.body;
-    const {user} = req.body
+    const { id } = req.body;
+    const { user } = req.body
     console.log(id);
     console.log(req.body);
     const updatedUser = await User.findByIdAndUpdate(id, {
       $set: req.body.user
     }
-    
-      
+
+
     );
     res.status(200).json(updatedUser);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export const userDelete = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    console.log("sd");
+    await User.findByIdAndDelete(id);
+    res.status(200).json("User Deleted");
   } catch (err) {
     next(err);
   }
