@@ -60,11 +60,12 @@ export const userUpdate = async (req, res, next) => {
 
 export const userDelete = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    console.log(id);
-    console.log("sd");
-    await User.findByIdAndDelete(id);
-    res.status(200).json("User Deleted");
+    // const { id } = req.params;
+    // console.log(id);
+    // console.log("sd");
+    // await User.deleteOne({_id:id});
+    // res.status(200).json("User Deleted");
+    console.log("Delete");
   } catch (err) {
     next(err);
   }
