@@ -15,10 +15,8 @@ export const updateUser = async (req, res, next) => {
 }
 export const deleteUser = async (req, res, next) => {
   try {
-    const { id } = req.body;
-    console.log("dfsvs");
-    console.log(id);
-    await User.findByIdAndDelete(id);
+    
+    await User.findByIdAndDelete(req.params.id);
     res.status(200).json("User has been deleted.");
   } catch (err) {
     next(err);
@@ -60,7 +58,7 @@ export const userUpdate = async (req, res, next) => {
 
 export const userDelete = async (req, res, next) => {
   try {
-    // const { id } = req.params;
+    // const { id } = req.params.id;
     // console.log(id);
     // console.log("sd");
     // await User.deleteOne({_id:id});
